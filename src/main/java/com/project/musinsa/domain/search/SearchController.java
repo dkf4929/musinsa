@@ -25,14 +25,11 @@ import java.util.List;
 public class SearchController {
     private final SearchService searchService;
 
-    @Operation(summary = "상품 추가", description = "새로운 상품을 추가합니다.")
+    @Operation(summary = "브랜드, 상품 가격, 총액 조회", description = "카테고리 별 최저가격 브랜드와 상품 가격, 총액을 조회하는 API")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "새로운 상품이 추가되었습니다.", content = @Content(
+            @ApiResponse(responseCode = "200", description = "조회 완료.", content = @Content(
                     mediaType = "application/json",
-                    schema = @Schema(implementation = Long.class))),
-            @ApiResponse(responseCode = "400", description = "상품 저장 실패", content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(example = "{ \"message\": \"입력값 검증에 실패했습니다.\" }"))),
+                    schema = @Schema(implementation = LowestPriceCategoryResponseDto.class))),
             @ApiResponse(responseCode = "500", description = "서버 오류", content = @Content(
                     mediaType = "application/json",
                     schema = @Schema(example = "{ \"message\": \"서버 오류 발생.\" }"))),
@@ -42,11 +39,31 @@ public class SearchController {
         return searchService.getLowestPriceByItemCategory();
     }
 
+    @Operation(summary = "최저가 브랜드 상품 가격 및 총액 조회",
+            description = "단일 브랜드로 모든 카테고리 상품을 구매할 때 최저가격에 판매하는 브랜드와 카테고리의 상품가격, 총액을 조회하는 API")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "조회 완료.", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = LowestPriceResponseDto.class))),
+            @ApiResponse(responseCode = "500", description = "서버 오류", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(example = "{ \"message\": \"서버 오류 발생.\" }"))),
+    })
     @GetMapping("/brand/lowest-price")
     public LowestPriceResponseDto getLowestPriceByBrand() {
         return searchService.getLowestPriceByBrand();
     }
 
+    @Operation(summary = "카테고리별 최저/최고 가격 상품 조회",
+            description = "카테고리 이름으로 최저, 최고 가격 브랜드와 상품 가격을 조회하는 API\n")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "조회 완료.", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = ItemPriceResponseDto.class))),
+            @ApiResponse(responseCode = "500", description = "서버 오류", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(example = "{ \"message\": \"서버 오류 발생.\" }"))),
+    })
     @GetMapping("/lowest-price/{itemCategory}")
     public ItemPriceResponseDto getMinMaxPriceByCategory(@PathVariable ItemCategory itemCategory) {
         return searchService.getMinMaxPriceByCategory(itemCategory);

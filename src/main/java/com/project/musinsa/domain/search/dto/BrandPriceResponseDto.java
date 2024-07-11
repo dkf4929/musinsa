@@ -3,14 +3,17 @@ package com.project.musinsa.domain.search.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.musinsa.domain.item.Item;
 import com.project.musinsa.global.utils.CommonUtils;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 @Getter
 public class BrandPriceResponseDto {
     @JsonProperty("브랜드")
+    @Schema(description = "브랜드명", example = "FREI")
     private String brandName;
 
     @JsonProperty("가격")
+    @Schema(description = "가격", example = "10,000")
     private String price;
 
     public static BrandPriceResponseDto of(String brandName, Integer price) {

@@ -3,13 +3,17 @@ package com.project.musinsa.domain.search.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.musinsa.global.utils.CommonUtils;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 @Getter
 public class CategoryResponseDto {
     @JsonProperty("카테고리")
+    @Schema(description = "카테고리명", example = "TOP")
     private String categoryName;
+
     @JsonProperty("가격")
+    @Schema(description = "가격", example = "10,000")
     private String price;
 
     @JsonIgnore

@@ -1,17 +1,21 @@
 package com.project.musinsa.domain.item.dto;
 
 import com.project.musinsa.domain.brand.ItemCategory;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
 public class ItemSaveRequestDto {
-    @NotNull
+    @NotNull(message = "카테고리를 지정하세요.")
+    @Schema(description = "상품 카테고리", example = "TOP")
     private ItemCategory itemCategory;
 
-    @NotNull
+    @NotNull(message = "브랜드 ID를 입력하세요.")
+    @Schema(description = "브랜드 아이디")
     private Long brandId;
 
-    @NotNull
+    @NotNull(message = "가격을 입력하세요.")
+    @Schema(description = "상품 가격", example = "10,000")
     private Integer price;
 }
