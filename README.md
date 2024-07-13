@@ -77,7 +77,7 @@
   'http://localhost:8080/musinsa/api/search/brand/lowest-price' \
   -H 'accept: application/json'
   ```
-  {
+   {
   "최저가": {
     "브랜드": "D",
     "카테고리": [
