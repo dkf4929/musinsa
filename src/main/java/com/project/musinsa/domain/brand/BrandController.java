@@ -1,5 +1,6 @@
 package com.project.musinsa.domain.brand;
 
+import com.project.musinsa.domain.brand.dto.BrandResponseDto;
 import com.project.musinsa.domain.brand.dto.BrandSaveRequestDto;
 import com.project.musinsa.domain.brand.dto.BrandUpdateRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,6 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Tag(name = "BRAND REST API", description = "브랜드 API")
 @RestController
@@ -21,6 +25,52 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/musinsa/api/brand")
 public class BrandController {
     private final BrandService brandService;
+
+    @GetMapping
+    @Operation(summary = "브랜드 조회", description = "모든 브랜드를 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "브랜드가 조회되었습니다.", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = Long.class))),
+            @ApiResponse(responseCode = "500", description = "서버 오류", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(example = "{ \"message\": \"서버 오류 발생.\" }")))
+    })
+    public List<BrandResponseDto> findBrandAll() {
+        List<Brand> brands = brandService.findBrandAll();
+
+        // entity to dto
+        return brands.stream().map(brand -> {
+            return BrandResponseDto.builder()
+                    .id(brand.getId())
+                    .brandName(brand.getName())
+                    .build();
+                })
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{brandId}")
+    @Operation(summary = "브랜드 조회", description = "특정 브랜드를 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "브랜드가 조회되었습니다.", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = Long.class))),
+            @ApiResponse(responseCode = "400", description = "조회 실패", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(example = "{ \"message\": \"유효한 ID가 아닙니다.\" }"))),
+            @ApiResponse(responseCode = "500", description = "서버 오류", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(example = "{ \"message\": \"서버 오류 발생.\" }")))
+    })
+    public BrandResponseDto findBrand(@PathVariable Long brandId) {
+        Brand brand = brandService.findBrand(brandId);
+
+        return BrandResponseDto.builder()
+                .id(brand.getId())
+                .brandName(brand.getName())
+                .build();
+    }
+
 
     // 브랜드 저장
     @Operation(summary = "브랜드 저장", description = "새로운 브랜드를 추가합니다.")
@@ -37,7 +87,7 @@ public class BrandController {
     })
     @PostMapping
     public ResponseEntity<Long> saveBrand(@Valid @RequestBody BrandSaveRequestDto saveRequestDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(brandService.saveBrand(saveRequestDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(brandService.saveBrand(saveRequestDto).getId());
     }
 
     @Operation(summary = "브랜드 수정", description = "브랜드 정보를 수정합니다.")
