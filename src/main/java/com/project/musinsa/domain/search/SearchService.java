@@ -8,12 +8,14 @@ import com.project.musinsa.domain.item.ItemRepository;
 import com.project.musinsa.domain.search.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class SearchService {
     private final ItemRepository itemRepository;
     private final BrandRepository brandRepository;
@@ -21,6 +23,8 @@ public class SearchService {
     public List<LowestPriceCategoryResponseDto> getLowestPriceByItemCategory() {
         return Arrays.stream(ItemCategory.values())
                 .flatMap(category ->
+                        // 카테고리로 상품 검색
+                        // 최저가 찾는다.
                         itemRepository.findByItemCategory(category).stream()
                                 .min(Comparator.comparingInt(Item::getPrice))
                                 .map(item -> {
@@ -60,14 +64,17 @@ public class SearchService {
     public ItemPriceResponseDto getMinMaxPriceByCategory(ItemCategory itemCategory) {
         List<Item> itemList = itemRepository.findByItemCategory(itemCategory);
 
+        // 최저가 상품
         Item minItem = itemList.stream()
                 .min(Comparator.comparing(Item::getPrice))
                 .get();
 
+        // 최고가 상품
         Item maxItem = itemList.stream()
                 .max(Comparator.comparing(Item::getPrice))
                 .get();
 
+        // dto 변환
         return ItemPriceResponseDto.of(itemCategory,
                 BrandPriceResponseDto.of(minItem.getBrand().getName(), minItem.getPrice()),
                 BrandPriceResponseDto.of(maxItem.getBrand().getName(), maxItem.getPrice()));
