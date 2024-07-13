@@ -146,3 +146,17 @@
     > /musinsa/api/item (POST)
   + 상품수정
     > /musinsa/api/item (PUT)
+  + 상품삭제
+    > /musinsa/api/item/{itemId} (DELETE)
+
++ BRAND
+  + 브랜드 조회 ALL
+    > /musinsa/api/brand (GET)
+  + 특정 브랜드 조회
+    > /musinsa/api/brand/{brandId} (GET)
+  + 상품추가
+    > /musinsa/api/brand (POST)
+  + 상품수정
+    > /musinsa/api/brand (PUT)
+  + 상품삭제
+    > /musinsa/api/brand (DELETE)
