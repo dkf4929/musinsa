@@ -123,7 +123,6 @@
   'http://localhost:8080/musinsa/api/search/lowest-price/TOP' \
   -H 'accept: application/json'
 ```
-
 {
   "카테고리": "상의",
   "최저가": {
@@ -139,10 +138,11 @@
 
 ### 구현 4 - 브랜드 및 상품을 추가/업데이트 /삭제하는 API
 + ITEM
-  + 상품조회 ALL
-  ++ /musinsa/api/item (GET)
-  + 특정 상품조회
-  ++ /musinsa/api/item/{itemId} (GET)
+  + 상품 조회 ALL
+    > /musinsa/api/item (GET)
+  + 특정 상품 조회
+    > /musinsa/api/item/{itemId} (GET)
   + 상품추가
-  ++ /musinsa/api/item (POST)
-  ++ RequestBody (swagger 참조) 
+    > /musinsa/api/item (POST)
+  + 상품수정
+    > /musinsa/api/item (PUT)
