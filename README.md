@@ -122,7 +122,8 @@
 + 요청 path : curl -X 'GET' \
   'http://localhost:8080/musinsa/api/search/lowest-price/TOP' \
   -H 'accept: application/json'
-  ```
+```
+
 {
   "카테고리": "상의",
   "최저가": {
@@ -134,7 +135,8 @@
     "가격": "11,400"
   }
 }
-  ```
+```
+
 ### 구현 4 - 브랜드 및 상품을 추가/업데이트 /삭제하는 API
 + ITEM
   + 상품조회 ALL
