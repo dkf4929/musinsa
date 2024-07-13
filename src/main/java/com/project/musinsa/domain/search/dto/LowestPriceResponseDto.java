@@ -1,7 +1,9 @@
 package com.project.musinsa.domain.search.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class LowestPriceResponseDto {
     @JsonProperty("최저가")
     private LowestPriceBrandResponseDto lowestPrice;
