@@ -9,6 +9,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
+@Schema(title = "상품 최저가/최고가 응답 DTO")
 public class ItemPriceResponseDto {
     @JsonProperty("카테고리")
     @Schema(description = "카테고리명", example = "TOP")

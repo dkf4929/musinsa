@@ -4,8 +4,11 @@ import com.project.musinsa.domain.brand.ItemCategory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Schema(title = "상품 update 요청 DTO")
+@Setter
 public class ItemUpdateRequestDto {
     @NotNull(message = "상품 ID를 입력하세요.")
     private Long itemId;

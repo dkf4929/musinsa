@@ -3,9 +3,11 @@ package com.project.musinsa.domain.brand.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Schema(title = "브랜드 update 요청 DTO")
+@Setter
 public class BrandUpdateRequestDto {
     @NotNull(message = "브랜드 ID를 입력하세요.")
     @Schema(description = "브랜드 아이디")

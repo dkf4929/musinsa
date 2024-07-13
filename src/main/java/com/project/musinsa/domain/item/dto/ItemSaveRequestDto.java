@@ -4,8 +4,11 @@ import com.project.musinsa.domain.brand.ItemCategory;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
+@Schema(title = "상품 save 요청 DTO")
 public class ItemSaveRequestDto {
     @NotNull(message = "카테고리를 지정하세요.")
     @Schema(description = "상품 카테고리", example = "TOP")

@@ -6,6 +6,7 @@ import com.project.musinsa.global.utils.CommonUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
+@Schema(title = "카테고리별 상품 응답 DTO")
 @Getter
 public class CategoryResponseDto {
     @JsonProperty("카테고리")
