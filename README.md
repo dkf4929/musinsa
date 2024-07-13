@@ -77,7 +77,6 @@
   'http://localhost:8080/musinsa/api/search/brand/lowest-price' \
   -H 'accept: application/json'
   ```
-   {
   "최저가": {
     "브랜드": "D",
     "카테고리": [
@@ -116,7 +115,6 @@
     ],
     "총액": "36,100"
   }
-}
   ```
 ### 구현 3 - 카테고리 이름으로 최저, 최고 가격 브랜드와 상품 가격을 조회하는 API
 + requestBody : x
