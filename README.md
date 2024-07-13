@@ -24,6 +24,7 @@
 + 요청 path : curl -X 'GET' \
   'http://localhost:8080/musinsa/api/search/item-categories/lowest-price' \
   -H 'accept: application/json'
+```
 {
   "상품": [
     {
@@ -68,4 +69,5 @@
     }
   ],
   "총액": "34,100"
-}  
+}
+```
