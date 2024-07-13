@@ -10,6 +10,4 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByItemCategory(ItemCategory itemCategory);
 
     List<Item> findByBrand(Brand brand);
-
-    List<Item> countDistinctItemsByBrand(Brand brand);
 }
