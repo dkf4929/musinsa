@@ -6,7 +6,9 @@ import com.project.musinsa.global.utils.CommonUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
+
 @Getter
+@Schema(title = "상품 가격 및 브랜드 응답 DTO")
 public class BrandPriceResponseDto {
     @JsonProperty("브랜드")
     @Schema(description = "브랜드명", example = "FREI")
